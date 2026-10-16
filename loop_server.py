@@ -2,17 +2,17 @@ import socket
 import time
 
 def recv(sock,addr,i):
-    now = time.time()
     if i == 1:
+        _time = time.time()
         second = '(첫 접속)'
     else: 
+        now = time.time()
         second = f'직전 접속과의 간격:{now - _time}'
-    now = time.time()
     data = sock.recv(1024)
     print('접속 #',i, addr[0],second)
 
 _time = time.time() # 1970년대부터 지금까지 흐른시간
-i = 0
+i = 1
 s = socket.socket()
 s.bind(('',9999))
 s.listen(1)
