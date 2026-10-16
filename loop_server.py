@@ -10,7 +10,7 @@ s.listen(1)
 while True:
     print('대기 중...')
     conn, addr = s.accept()
-    print('접속한 클라이언트:',addr)
+    print('접속한 클라이언트:',addr[0])
 
     recv(conn,addr)
     conn.close()
