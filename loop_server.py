@@ -1,29 +1,22 @@
-import socket
+# 반복해서 클라이언트 소켓의 접속을 받는 서버 코드
+import socket 
 import time
 
-def recv(sock,addr,i):
+def recv(addr,i,_time): # 연결된 클라이언트 소켓의 직전 접속과의 간격을 출력하는 함수
     if i == 1:
-        _time = time.time()
-        second = '(첫 접속)'
-    else: 
-        now = time.time()
-        second = f'직전 접속과의 간격:{now - _time}'
-    data = sock.recv(1024)
-    print('접속 #',i, addr[0],second)
+        print('접속 #',i, addr[0], '(첫 접속)\n')
+    else:
+        _time = time.time() - _time 
+        print('접속 #',i, addr[0], '직전 접속과의 간격:',_time,'초\n')    
 
-_time = time.time() # 1970년대부터 지금까지 흐른시간
-i = 1
-s = socket.socket()
-s.bind(('',9999))
-s.listen(1)
-try:
-    while True:
-        print('대기 중...')
-        conn, addr = s.accept()
-        print('접속한 클라이언트:',addr[0])
-
-        recv(conn,addr,i)
-        conn.close()
-        i += 1
-finally:    
-    s.close()    
+ser_sock = socket.socket() # 클라이언트 접속 역할하는 소켓 생성
+ser_sock.bind(('',9999)) # 아무나 접속 받고 9999번 포트 할당
+ser_sock.listen(1) # 서버소켓 대기 시킴 (대기열 1)
+print('대기 중...')
+now = time.time() #연결 후 시간
+conn, addr = ser_sock.accept() # 클라이언트 소켓과 연결되었을 때, 대화 소켓 지정, 주소 받아두기
+i = 1 # 횟수 측정 용 변수
+while True: # 출력 후 클라이언트 연결 해제 후 다음 클라이언트 기다림
+    recv(addr,i,now)
+    i += 1
+    conn.close()
