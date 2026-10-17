@@ -14,13 +14,12 @@ ser_sock = socket.socket() # 클라이언트 접속 역할하는 소켓 생성
 ser_sock.bind(('',9999)) # 아무나 접속 받고 9999번 포트 할당
 ser_sock.listen(1) # 서버소켓 대기 시킴 (대기열 1)
 print('대기 중...')
-now = time.time() #연결 후 시간
 i = 1 # 횟수 측정 용 변수
 
 while True: # 출력 후 클라이언트 연결 해제 후 다음 클라이언트 기다림
     conn, addr = ser_sock.accept() # 클라이언트 소켓과 연결되었을 때, 대화 소켓 지정, 주소 받아두기
     before_time = None
     after_time = None
-    recv(addr,i,now)
+    recv(addr,i,before_time,after_time)
     i += 1
     conn.close()
