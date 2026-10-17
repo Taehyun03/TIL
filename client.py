@@ -5,7 +5,7 @@ def send(sock):
     sock.send(message.encode())
 
 
-for i in range(3):
+for i in range(20):
     client_sock = socket.socket()
     client_sock.connect(('192.168.0.5',9999))
     send(client_sock)

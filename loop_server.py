@@ -23,4 +23,3 @@ while True: # 출력 후 클라이언트 연결 해제 후 다음 클라이언�
     perv_time = recv(addr,i,perv_time,now) # 이전 시간 받음
     i += 1
     conn.close()
-    time.sleep(1)
