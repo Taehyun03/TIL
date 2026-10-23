@@ -7,7 +7,7 @@ s.bind(('',9999)) # 모든 ip에서 오는 접속을 9999번 포트로 받음
 s.listen(1) # 대기열 1개
 print('접속 대기 중...')
 
-with open('log.csv','w') as f: # 접속 log를 저장할 파일 쓰기권한 생성
+with open('badlog.csv','w') as f: # 접속 log를 저장할 파일 쓰기권한 생성
     writer = csv.writer(f) # 파일에 대한 쓰기 권한 객체 생성
     writer.writerow(['ip','timestamp','interval']) # 첫번째 행 생성
     before_time = None # 이전 연결 시간
